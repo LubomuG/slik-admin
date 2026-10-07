@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "node app.js"
+    "start": "node appadmin.js"
   },
   "dependencies": {
     "cron": "^4.4.0",
