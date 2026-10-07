@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slik — Адмін-панель</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+
+
+<body class="theme-dark">
+    <div class="wrap">
+
+        <aside class="sidebar">
+            <div class="logo">
+                <span class="logoMark">S</span>
+                <span class="logoText">Slik<span class="logoDot">.</span><small
+                        data-i18n="adminLabel">адмін</small></span>
+            </div>
+
+            <nav class="nav">
+                <button class="navBtn active" id="products" data-tab="products">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                        <path d="M21 8L12 3 3 8v8l9 5 9-5V8z" />
+                        <path d="M3 8l9 5 9-5" />
+                        <path d="M12 13v8" />
+                    </svg>
+                    <span data-i18n="nav.products">Товари</span>
+                </button>
+                <button class="navBtn" id="orders" data-tab="orders">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                        <path d="M6 2h9l3 3v17H6z" />
+                        <path d="M9 8h6M9 12h6M9 16h4" />
+                    </svg>
+                    <span data-i18n="nav.orders">Замовлення</span>
+                </button>
+                <button class="navBtn" id="emails" data-tab="emails">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                        <rect x="2.5" y="5" width="19" height="14" rx="2" />
+                        <path d="M3 6.5l9 6.5 9-6.5" />
+                    </svg>
+                    <span data-i18n="nav.emails">Emails</span>
+                </button>
+                <button class="navBtn" id="partners" data-tab="partners">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                        <circle cx="8" cy="8" r="3.2" />
+                        <circle cx="17" cy="9" r="2.6" />
+                        <path d="M2.5 20c0-3.3 2.5-5.5 5.5-5.5s5.5 2.2 5.5 5.5" />
+                        <path d="M14.5 15c2.5.2 4.5 2.2 4.5 5" />
+                    </svg>
+                    <span data-i18n="nav.partners">Партнери</span>
+                </button>
+                <button class="navBtn" id="feedback" data-tab="feedback">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                        <path d="M12 2.5l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 16.5l-5.4 2.9 1-6.1L3.2 9l6.1-.9L12 2.5z" />
+                    </svg>
+                    <span data-i18n="nav.feedback">Відгуки</span>
+                </button>
+            </nav>
+
+            <div class="sidebarControls">
+                <div class="controlRow">
+                    <span class="controlLabel" data-i18n="controls.theme">Тема</span>
+                    <button class="themeToggle" id="themeToggle" type="button" title="Світла / темна тема">
+                        <span class="toggleKnob">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="4" />
+                                <path
+                                    d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" />
+                            </svg>
+                        </span>
+                    </button>
+                </div>
+                <div class="controlRow">
+                    <span class="controlLabel" data-i18n="controls.language">Мова</span>
+                    <select id="langSelect" class="langSelect">
+                        <option value="uk">Українська</option>
+                        <option value="en">English</option>
+                        <option value="pl">Polski</option>
+                    </select>
+                </div>
+            </div>
+        </aside>
+
+        <main class="content">
+
+            <section class="tabContent productsTab" data-tab-content="products">
+                <div class="tabHeader">
+                    <h1 data-i18n="products.title">Товари</h1>
+                </div>
+
+                <div class="formCard">
+                    <div class="formPhotoRow">
+                        <div class="photo" id="photoBox">
+                            <img src="#" alt="Фото" id="photoPreview">
+                            <span class="photoPlaceholder" id="photoPlaceholder">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+                                    <rect x="3" y="5" width="18" height="14" rx="2" />
+                                    <circle cx="9" cy="11" r="2" />
+                                    <path d="M21 16l-5-4-4 3-3-2-6 5" />
+                                </svg>
+                                <span data-i18n="products.photoLabel">Фото</span>
+                            </span>
+                        </div>
+                        <input type="file" id="photoInput" accept="image/*" hidden>
+                        <div class="formFields">
+                            <input type="text" id="name" class="fieldInput"
+                                data-i18n-placeholder="products.namePlaceholder" placeholder="Назва товару">
+                            <input type="text" id="price" class="fieldInput"
+                                data-i18n-placeholder="products.pricePlaceholder" placeholder="Ціна, грн">
+                            <textarea id="descriptiontext" class="fieldTextarea"
+                                data-i18n-placeholder="products.descPlaceholder" placeholder="Опис товару"></textarea>
+                            <label class="checkRow">
+                                <input type="checkbox" id="inStock" checked>
+                                <span data-i18n="products.inStockLabel">Є в наявності</span>
+                            </label>
+                        </div>
+                    </div>
+                    <button class="primaryBtn" id="saveProduct" data-i18n="products.saveBtn">Зберегти товар</button>
+                </div>
+
+                <div class="cardsGrid" id="productsGrid"></div>
+            </section>
+
+            <section class="tabContent ordersTab" data-tab-content="orders" style="display:none">
+                <div class="tabHeader">
+                    <h1 data-i18n="orders.title">Замовлення</h1>
+                </div>
+
+                <div class="listWrap" id="ordersList"></div>
+            </section>
+            <section class="tabContent emailsTab" data-tab-content="emails" style="display:none">
+                <div class="tabHeader">
+                    <h1 data-i18n="emails.title">Emails</h1>
+                </div>
+
+                <div class="formCard inlineForm">
+                    <button class="secondaryBtn" id="copyEmails" data-i18n="emails.copyBtn">Скопіювати всі</button>
+                </div>
+
+                <div class="formCard">
+                    <input type="text" id="broadcastSubject" class="fieldInput"
+                        data-i18n-placeholder="emails.subjectPlaceholder" placeholder="Тема листа">
+                    <textarea id="broadcastText" class="fieldTextarea" data-i18n-placeholder="emails.textPlaceholder"
+                        placeholder="Текст листа"></textarea>
+                    <button class="primaryBtn" id="sendBroadcast" data-i18n="emails.sendBtn">Надіслати всім</button>
+                    <p class="itemSub" id="broadcastNote"></p>
+                </div>
+
+                <div class="listWrap" id="emailsList"></div>
+            </section>
+
+            <section class="tabContent partnersTab" data-tab-content="partners" style="display:none">
+                <div class="tabHeader">
+                    <h1 data-i18n="partners.title">Партнери</h1>
+                </div>
+
+                <div class="formCard">
+                    <div class="formRow">
+                        <div class="photo" id="partnerPhotoBox">
+                            <img src="#" alt="Фото" id="partnerPhotoPreview">
+                            <span class="photoPlaceholder" id="partnerPhotoPlaceholder">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+                                    <rect x="3" y="5" width="18" height="14" rx="2" />
+                                    <circle cx="9" cy="11" r="2" />
+                                    <path d="M21 16l-5-4-4 3-3-2-6 5" />
+                                </svg>
+                                <span>Фото</span>
+                            </span>
+                        </div>
+                        <input type="file" id="partnerPhotoInput" accept="image/*" hidden>
+                        <input type="text" id="partnerName" class="fieldInput"
+                            data-i18n-placeholder="partners.namePlaceholder" placeholder="Назва компанії">
+                        <input type="text" id="partnerPhone" class="fieldInput"
+                            data-i18n-placeholder="partners.phonePlaceholder" placeholder="Телефон">
+                    </div>
+                    <select id="partnerStatus" class="fieldInput">
+                        <option value="active" data-i18n="partners.status.active">Активний</option>
+                        <option value="inactive" data-i18n="partners.status.inactive">Неактивний</option>
+                    </select>
+                    <label class="checkRow">
+                        <input type="checkbox" id="partnerExpiryCheck">
+                        <span data-i18n="partners.expiryLabel">Встановити термін дії</span>
+                    </label>
+                    <input type="datetime-local" id="partnerExpiryInput" class="fieldInput full">
+                    <button class="primaryBtn" id="savePartner" data-i18n="partners.addBtn">Додати партнера</button>
+                </div>
+
+                <div class="cardsGrid" id="partnersGrid"></div>
+            </section>
+
+            <section class="tabContent feedbackTab" data-tab-content="feedback" style="display:none">
+                <div class="tabHeader">
+                    <h1 data-i18n="feedback.title">Відгуки</h1>
+                </div>
+
+                <div class="formCard">
+                    <div class="formRow">
+                        <input type="text" id="feedbackName" class="fieldInput"
+                            data-i18n-placeholder="feedback.namePlaceholder" placeholder="Ім'я клієнта">
+                        <select id="feedbackRating" class="fieldInput">
+                            <option value="5">★★★★★</option>
+                            <option value="4">★★★★☆</option>
+                            <option value="3">★★★☆☆</option>
+                            <option value="2">★★☆☆☆</option>
+                            <option value="1">★☆☆☆☆</option>
+                        </select>
+                    </div>
+                    <textarea id="feedbackText" class="fieldTextarea full"
+                        data-i18n-placeholder="feedback.textPlaceholder" placeholder="Текст відгуку"></textarea>
+                    <button class="primaryBtn" id="saveFeedback" data-i18n="feedback.addBtn">Додати відгук</button>
+                </div>
+
+                <div class="listWrap" id="feedbackList"></div>
+            </section>
+
+        </main>
+    </div>
+    <script src="mainadmin.js"></script>
+</body>
+
+</html>
